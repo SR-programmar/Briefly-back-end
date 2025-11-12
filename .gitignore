@@ -1,0 +1,7 @@
+### Keeps repository clean ###
+__pycache__/
+back_env/
+
+### Files used for testing ###
+*.txt
+*.js
