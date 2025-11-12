@@ -1,8 +1,10 @@
 ### Modules ###
 from flask import Flask, request, jsonify
 from summarizer import summarize_content
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app, methods=["POST"])
 
 # Function called at root url
 @app.route("/", methods=["POST"])
