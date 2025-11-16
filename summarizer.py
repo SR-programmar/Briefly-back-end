@@ -24,4 +24,3 @@ def summarize_content(text_string, sentence_amt=2):
     summary = lex_sum(parser.document, sentence_amt)
     
     return summary_to_string(summary)
-
