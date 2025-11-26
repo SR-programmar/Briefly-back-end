@@ -1,9 +1,13 @@
 ### Modules ###
 import nltk
 
+### Weak Summarizer ###
 from sumy.summarizers.lex_rank import LexRankSummarizer
 from sumy.parsers.plaintext import PlaintextParser
 from sumy.nlp.tokenizers import Tokenizer
+
+### AI Summarizer ###
+from api import requestGPT4
 
 # Converts summary object into a string
 def summary_to_string(summary):
@@ -25,3 +29,14 @@ def summarize_content(text_string, sentence_amt=2):
     
     return summary_to_string(summary)
 
+# Summarizes the webpage's content using OpenAI's model
+def AI_summarization(text_string):
+    messages = []
+
+    response = requestGPT4(messages)
+
+    return response
+
+
+if __name__ == "__main__":
+    pass
