@@ -30,8 +30,24 @@ def summarize_content(text_string, sentence_amt=2):
     return summary_to_string(summary)
 
 # Summarizes the webpage's content using OpenAI's model
-def AI_summarization(text_string):
-    messages = []
+def AI_summarization(webpage_content):
+
+
+    SYSTEM_INSTRUCTION = """
+    You are a helpful assistant that summarizes the content of the webpage.
+      The summary is intended to help blind users read the contents of the webpage faster than a screenreader. 
+      You will be getting a messy input that’s the .textContent of the whole webPage. 
+      You are required to organize it, find the most important things to 
+      include in the summary (e.g. navigation, footer, header, important articles etc.). 
+      You are not to include anything unimportant in the summary. 
+      The summary should be very descriptive of the webpage and should be very brief so the 
+      user doesn’t have to listen for that long. You should only return the summary and don’t speak of anything else.
+"""
+
+    messages = [
+            { "role":"system", "content": SYSTEM_INSTRUCTION },
+            { "role":"user", "content": webpage_content }
+        ]
 
     response = requestGPT4(messages)
 
@@ -39,4 +55,11 @@ def AI_summarization(text_string):
 
 
 if __name__ == "__main__":
-    pass
+    lines = ""
+
+    with open("cnt.txt", "r") as f:
+        for line in f:
+            lines += line
+
+    print("Sumamrizing...")
+    print(f"Summary: {AI_summarization(lines)}")
