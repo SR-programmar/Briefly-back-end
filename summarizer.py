@@ -42,6 +42,8 @@ def AI_summarization(webpage_content):
       You are not to include anything unimportant in the summary. 
       The summary should be very descriptive of the webpage and should be very brief so the 
       user doesn’t have to listen for that long. You should only return the summary and don’t speak of anything else.
+      Don’t include asterisks and the summary should be only 1000 words and below. Do not put “Summary: “ at the beginning.
+
 """
 
     messages = [
@@ -62,4 +64,4 @@ if __name__ == "__main__":
             lines += line
 
     print("Sumamrizing...")
-    print(f"Summary: {AI_summarization(lines)}")
+    print(f"{AI_summarization(lines)}")

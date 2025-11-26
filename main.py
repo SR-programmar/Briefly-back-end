@@ -1,18 +1,23 @@
 ### Modules ###
 from flask import Flask, request, jsonify
-from summarizer import summarize_content
+from summarizer import summarize_content, AI_summarization
 from agent import agent_request
 from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app, methods=["POST"])
 
+
+@app.route("/")
+def root_url():
+    return "<h1>Get</h1>"
+
 # Function called at root url
-@app.route("/", methods=["POST"])
-def home_page():
+@app.route("/ai-sum", methods=["POST"])
+def AI_summary_call():
     data = request.get_json()
 
-    summary = summarize_content(data["input"], 5)
+    summary = AI_summarization(data["input"])
 
     response = {"summary": summary}
 
@@ -34,8 +39,8 @@ def home_page():
     
 # When user prompts the agent
 @app.route("/agent-call", methods=["POST"])
-def agent_request():
-    data = request.json()
+def agent_call():
+    data = request.get_json()
 
     agent_response = agent_request(data["input"])
     response = {"response": agent_response}
