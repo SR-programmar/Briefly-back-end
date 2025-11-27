@@ -1,4 +1,4 @@
-from api import requestGPT4
+from api import requestOpenAI
 
 # Seperate chat to an AI agent that acts as a Siri-like Web browser assistant
 # That can answer simple questions but also perform browser operations
@@ -31,7 +31,7 @@ def agent_request(user_prompt):
     messages = [{ "role":"system", "content": SYSTEM_INSTRUCTION },
             { "role":"user", "content": user_prompt }]
 
-    response = requestGPT4(messages)
+    response = requestOpenAI(messages)
 
     return response
 

@@ -12,7 +12,7 @@ client = OpenAI(api_key=TOKEN, base_url=ENDPOINT)
 
 # Pass in a dictionary of messages to instruct an OpenAI Model on what to do
 
-def requestGPT4(messages):
+def requestOpenAI(messages):
     response = client.chat.completions.create(
         messages=messages,
         temperature=1.0,

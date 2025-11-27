@@ -7,7 +7,7 @@ from sumy.parsers.plaintext import PlaintextParser
 from sumy.nlp.tokenizers import Tokenizer
 
 ### AI Summarizer ###
-from api import requestGPT4
+from api import requestOpenAI
 
 # Converts summary object into a string
 def summary_to_string(summary):
@@ -51,7 +51,7 @@ def AI_summarization(webpage_content):
             { "role":"user", "content": webpage_content }
         ]
 
-    response = requestGPT4(messages)
+    response = requestOpenAI(messages)
 
     return response
 
