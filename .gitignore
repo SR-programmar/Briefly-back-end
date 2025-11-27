@@ -2,6 +2,9 @@
 __pycache__/
 back_env/
 
-### Files used for testing ###
+### Files/directories used for testing ###
 cnt.txt
 *.js
+.env
+testing_js/
+*.mp3
