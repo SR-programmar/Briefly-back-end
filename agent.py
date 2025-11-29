@@ -11,17 +11,19 @@ def agent_request(user_prompt):
       an answer, or trying to perform a browser operation. Here are the browser operations
         as well as what it does. You are required to return an integer based on the function:
 
-
-    IlistTabs() - list all the tabs in the browser, index 0
-    openUrl() - openUrl in the current tab, return an argument called url, index 1
+    navigateTo() - open a url in a new tab, return an argument called arg1, index 0
+    openUrl() - openUrl in the current tab, return an argument called arg1, index 1
+    listTabs() - list all the tabs in the browser, index 2
+    
 
     You should return your response in a JSON format, here’s the template json:
     [
       {
-        “Response”: [response for the user in string format],
-        “Index”: [return -1 if there’s no index, else return the index of the function]
-        “Call_function”: [true/false]
-        “Arguments”: [only return this if the function requires an argument]
+        "agentResponse": [response for the user in string format],
+        "index": [return -1 if there’s no index, else return the index of the function]
+        "arguments": { arg1: "value", arg2 "value", arg3 "value" }
+        [only return this if the function requires an argument. Make sure to only include args
+        if the function needs it]
       }
     ]
 
@@ -37,5 +39,4 @@ def agent_request(user_prompt):
 
 
 if __name__ == "__main__":
-    pass
-
+  pass
