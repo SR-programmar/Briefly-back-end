@@ -5,6 +5,8 @@ back_env/
 ### Files/directories used for testing ###
 cnt.txt
 *.js
-.env
 testing_js/
 *.mp3
+
+### Private Information ###
+.env
