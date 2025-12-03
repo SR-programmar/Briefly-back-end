@@ -27,6 +27,9 @@ def agent_request(user_prompt):
       }
     ]
 
+    please do not use any slashes or '`' any backticks around the quotes. 
+    This is for Javascript,
+    not Python.
 
     """
 

@@ -17,7 +17,7 @@ def root_url():
 def AI_summary_call():
     data = request.get_json()
 
-    summary = AI_summarization(data["input"])
+    summary = AI_summarization(data["input"], data["mode"])
 
     response = {"summary": summary}
 
@@ -27,11 +27,11 @@ def AI_summary_call():
 # That is used for when developers want to avoid getting rate-limited
 
 @app.route("/simple-sum", methods=["POST"])
-def home_page():
+def simple_summary_call():
 
     data = request.get_json()
 
-    summary = summarize_content(data["input"], 5)
+    summary = summarize_content(data["input"], data["mode"])
 
     response = {"summary": summary}
 
