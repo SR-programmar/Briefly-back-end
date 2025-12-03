@@ -41,7 +41,7 @@ def summarize_content(text_string, mode):
 # Summarizes the webpage's content using OpenAI's model
 def AI_summarization(webpage_content, mode):
 
-    # Default is long
+    # If mode is long
     char_amt = "1000 characters"
 
     ### Different types of summary lengths depending on user preference ###
@@ -61,7 +61,7 @@ def AI_summarization(webpage_content, mode):
       You are not to include anything unimportant in the summary. 
       The summary should be very descriptive of the webpage and should be very brief so the 
       user doesn’t have to listen for that long. You should only return the summary and don’t speak of anything else.
-      Don’t include asterisks and the summary should be only {char_amt} and below. Do not put “Summary: “ at the beginning.
+      Don’t include asterisks and the summary should be atleast {char_amt} and below. Do not put “Summary: “ at the beginning.
 
 """
 
@@ -78,9 +78,9 @@ def AI_summarization(webpage_content, mode):
 if __name__ == "__main__":
     lines = ""
 
-    with open("cnt.txt", "r") as f:
+    with open("cnt.txt", "r", encoding="utf-8") as f:
         for line in f:
             lines += line
 
-    print("Sumamrizing...")
-    print(f"{AI_summarization(lines)}")
+    print("Summarizing...")
+    # print(f"{AI_summarization(lines, "Long")}")
