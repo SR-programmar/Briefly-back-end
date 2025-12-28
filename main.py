@@ -48,6 +48,24 @@ def agent_call():
 
     return jsonify(response)
 
+# Used for developers to make calls without utilizing OpenAI API
+@app.route("/simple-agent-call", methods=["POST"])
+def agent_call():
+    data = request.get_json()
+
+    agent_response = [
+        {
+        "agentResponse": "This is the simple agent call. How can I assist you today",
+        "index": -1,
+        "userMessage": data
+        }
+    ]
+
+    response = {"response": agent_response}
+
+
+    return jsonify(response)
+
     
     
 
