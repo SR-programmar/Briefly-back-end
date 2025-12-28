@@ -50,7 +50,7 @@ def agent_call():
 
 # Used for developers to make calls without utilizing OpenAI API
 @app.route("/simple-agent-call", methods=["POST"])
-def agent_call():
+def simple_agent_call():
     data = request.get_json()
 
     agent_response = [
