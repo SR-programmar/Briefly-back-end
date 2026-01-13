@@ -53,13 +53,10 @@ def agent_call():
 def simple_agent_call():
     data = request.get_json()
 
-    agent_response = [
-        {
-        "agentResponse": "This is the simple agent call. How can I assist you today",
-        "index": -1,
-        "userMessage": data
-        }
-    ]
+    #"response":"[\n  {\n    \"agentResponse\": \"Hello! How can I assist you today?\",\n    \"index\": -1\n  }\n]"
+    # Make sure agent_response is a string
+    # This resulted in an error when it wasn't
+    agent_response = "[{\"agentResponse\": \"This is the simple agent call. How can I assist you today\", \"index\": -1}]"
 
     response = {"response": agent_response}
 
