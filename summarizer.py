@@ -1,55 +1,19 @@
-### Modules ###
-import nltk
-
-### Weak Summarizer ###
-from sumy.summarizers.lex_rank import LexRankSummarizer
-from sumy.parsers.plaintext import PlaintextParser
-from sumy.nlp.tokenizers import Tokenizer
 
 ### AI Summarizer ###
 from api import requestOpenAI
 
-# Converts summary object into a string
-def summary_to_string(summary):
-    formatted_sum = ""
-
-    for item in summary:
-        formatted_sum += f"{str(item)}\n"
-    
-    return formatted_sum
-
-# Summarizes the content using extractive summarization
-def summarize_content(text_string, mode):
-    nltk.download("punkt_tab")
-    lex_sum = LexRankSummarizer()
-    parser = PlaintextParser.from_string(text_string, Tokenizer("english"))
-
-    # Default is long
-    sentences = 5 
-
-    if mode == "Two-Sentence":
-        sentences = 2
-    elif mode == "Medium":
-        sentences = 4
-    elif mode == "Short":
-        sentences = 3
-
-    summary = lex_sum(parser.document, sentences)
-    
-    return summary_to_string(summary)
-
 # Summarizes the webpage's content using OpenAI's model
-def AI_summarization(webpage_content, mode):
+def AI_summarization(webpage_content, length):
 
     # If mode is long
     char_amt = "1000 characters"
 
     ### Different types of summary lengths depending on user preference ###
-    if mode == "Two-Sentence":
+    if length == "Two-Sentence":
         char_amt = "two sentences"
-    elif mode == "Medium":
+    elif length == "Medium":
         char_amt = "500 characters"
-    elif mode == "Short":
+    elif length == "Short":
         char_amt = "250 characters"
 
     SYSTEM_INSTRUCTION = f"""

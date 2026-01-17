@@ -17,7 +17,7 @@ def root_url():
 def AI_summary_call():
     data = request.get_json()
 
-    summary = AI_summarization(data["input"], data["mode"])
+    summary = AI_summarization(data["input"], data["length"])
 
     response = {"summary": summary}
 
@@ -31,7 +31,7 @@ def simple_summary_call():
 
     data = request.get_json()
 
-    summary = summarize_content(data["input"], data["mode"])
+    summary = f"This is a test summary for developers. The summary-length is {data["length"]}"
 
     response = {"summary": summary}
 
