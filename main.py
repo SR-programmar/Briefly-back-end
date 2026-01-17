@@ -1,6 +1,6 @@
 ### Modules ###
 from flask import Flask, request, jsonify
-from summarizer import summarize_content, AI_summarization
+from summarizer import AI_summarization
 from agent import agent_request
 from flask_cors import CORS
 
@@ -17,7 +17,7 @@ def root_url():
 def AI_summary_call():
     data = request.get_json()
 
-    summary = AI_summarization(data["input"], data["length"])
+    summary = AI_summarization(data["input"], data["length"], data["sum_type"])
 
     response = {"summary": summary}
 
@@ -31,7 +31,7 @@ def simple_summary_call():
 
     data = request.get_json()
 
-    summary = f"This is a test summary for developers. The summary-length is {data["length"]}"
+    summary = f"This is a test summary for developers. The summary-length is {data["length"]} and the summary type is {data["sum_type"]}"
 
     response = {"summary": summary}
 
@@ -51,7 +51,6 @@ def agent_call():
 # Used for developers to make calls without utilizing OpenAI API
 @app.route("/simple-agent-call", methods=["POST"])
 def simple_agent_call():
-    data = request.get_json()
 
     #"response":"[\n  {\n    \"agentResponse\": \"Hello! How can I assist you today?\",\n    \"index\": -1\n  }\n]"
     # Make sure agent_response is a string
