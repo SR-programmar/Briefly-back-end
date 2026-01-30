@@ -1,6 +1,6 @@
 from api import requestOpenAI
 
-# Seperate chat to an AI agent that acts as a Siri-like Web browser assistant
+# Separate chat to an AI agent that acts as a Siri-like Web browser assistant
 # That can answer simple questions but also perform browser operations
 def agent_request(user_prompt):
 
@@ -30,6 +30,11 @@ def agent_request(user_prompt):
     please do not use any slashes or '`' any backticks around the quotes. 
     This is for Javascript,
     not Python.
+
+    For the openUrl and navigateTo functions, if they ask to google information or for something on YouTube
+    create a url that includes their desired search. Example,
+    https://www.youtube.com/results?search_query=hey there
+    https://google.com/search?query=popular+restaurants
 
     """
 
