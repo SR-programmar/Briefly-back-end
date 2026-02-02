@@ -17,6 +17,17 @@ def agent_request(user_prompt):
     clickInteractive() - Click an element (anchor tag) on the screen based off it's text,
       return an argument called clickElementText, index 3
 
+    Sometimes, multiple functions may be required to perform an operation. For example, if the user wanted to
+    sign in on Google Classroom, you return [3, 1] clickInteractive: "Sign in" and navigateTo("url") .
+    Another example, they want to play the song "How Far I'll Go" from Moana, you return [3, 1] clickInteractive("How Far I'll Go") and navigateTo("url").
+    If they ask to play songs, videos, or anything else you can assume its YouTube and then you can return [3,1]. Remember, the clickInteractive index always comes before the openURL or navigateTo functions
+
+    For these scenarios, index should be an array of indices. [3, 1]
+    
+
+    If only one function is needed, then only include an 'int' not a 'list'
+    
+
     You should return your response in a JSON format, here’s the template json:
     [
       {
