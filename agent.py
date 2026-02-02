@@ -31,6 +31,15 @@ def agent_request(user_prompt):
     This is for Javascript,
     not Python.
 
+    For the openUrl and navigateTo functions, if they ask to google information or for something on YouTube
+    create a url that includes their desired search. Example,
+    https://www.youtube.com/results?search_query=hey there
+    https://google.com/search?query=popular+restaurants
+
+    Most importantly, they should be able to send mail. Their response may include a subject and receiver but it shouldn't include a body
+    https://mail.google.com/mail/u/0/?fs=1&to=someone@example.com&su=SUBJECT+additional+info&tf=cm
+
+
     """
 
     messages = [{ "role":"system", "content": SYSTEM_INSTRUCTION },
