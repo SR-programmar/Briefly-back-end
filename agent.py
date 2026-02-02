@@ -14,6 +14,10 @@ def agent_request(user_prompt):
     navigateTo() - open a url in a new tab, return an argument called url, index 0
     openUrl() - openUrl in the current tab, return an argument called url, index 1
     listTabs() - list all the tabs in the browser, index 2
+    clickInteractive() - Click an anchor tag or button on the screen, return an argument called clickElementText, index 3
+
+    The clickInteractive function works by searching the anchor tags/buttons to see if there text matches something the user requested. For example, if the user
+    said "Can you click on the video how far I'll go?" you return clickElementText: "How far I'll go."
 
     You should return your response in a JSON format, here’s the template json:
     [
