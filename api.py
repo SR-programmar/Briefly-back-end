@@ -13,6 +13,7 @@ client = OpenAI(api_key=TOKEN, base_url=ENDPOINT)
 # Pass in a dictionary of messages to instruct an OpenAI Model on what to do
 
 def requestOpenAI(messages):
+    # Creates a chat with an OpenAI Natural Language Processor
     response = client.chat.completions.create(
         messages=messages,
         temperature=1.0,
@@ -21,4 +22,5 @@ def requestOpenAI(messages):
         model="openai/gpt-4o"
     )
 
+    # Returns AI response
     return response.choices[0].message.content

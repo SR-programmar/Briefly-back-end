@@ -2,6 +2,8 @@
 ### AI Summarizer ###
 from api import requestOpenAI
 
+from preprocess import pre_process_webpage
+
 # System Prompts
 sum_types = {
     "general": "You are a helpful assistant that summarizes the content of an webpage. The summary is intended to help blind users read the content of a webpage faster than a screenreader. You will be getting a messy input that includes all the text content of the whole website. You are required to organize it, and find the most important things to include (E.g. Navigation, Footer, Header, Important Articles etc.). You are not to include anything that unimportant in the summary. The summary of the webpage should be very descriptive, but brief so the user doesn't have to listen for long. You should only return the summary and not speak of anything else.",
@@ -35,20 +37,10 @@ def AI_summarization(webpage_content, length, sum_type="general"):
 
     messages = [
             { "role":"system", "content": SYSTEM_INSTRUCTION },
-            { "role":"user", "content": webpage_content }
+            { "role":"user", "content": pre_process_webpage(webpage_content) }
         ]
 
     response = requestOpenAI(messages)
 
     return response
 
-# For testing purposes
-if __name__ == "__main__":
-    lines = ""
-
-    with open("cnt.txt", "r", encoding="utf-8") as f:
-        for line in f:
-            lines += line
-
-    print("Summarizing...")
-    print(f"{AI_summarization(lines, "Medium", "general")}")
