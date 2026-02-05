@@ -1,6 +1,6 @@
 from api import requestOpenAI
 
-# Seperate chat to an AI agent that acts as a Siri-like Web browser assistant
+# Separate chat to an AI agent that acts as a Siri-like Web browser assistant
 # That can answer simple questions but also perform browser operations
 def agent_request(user_prompt):
 
@@ -48,6 +48,3 @@ def agent_request(user_prompt):
 
     return response
 
-
-if __name__ == "__main__":
-  pass

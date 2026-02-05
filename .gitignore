@@ -5,9 +5,7 @@ node_modules/
 
 ### Files/directories used for testing ###
 cnt.txt
-*.js
 testing_js/
-*.mp3
 test.py
 
 ### Private Information ###

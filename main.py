@@ -5,14 +5,17 @@ from agent import agent_request
 from flask_cors import CORS
 
 app = Flask(__name__)
+# Allows other origins to make POST requests to this server
 CORS(app, methods=["POST"])
 
-
+# Function called at root url
 @app.route("/")
 def root_url():
     return "<h1>Get</h1>"
 
-# Function called at root url
+### ================================ End Points ================================ ###
+
+# Endpoint takes in webpage content and summarizes it with specified parameters
 @app.route("/ai-sum", methods=["POST"])
 def AI_summary_call():
     data = request.get_json()
@@ -23,8 +26,12 @@ def AI_summary_call():
 
     return jsonify(response)
 
-# This is an extractive based summarization method
-# That is used for when developers want to avoid getting rate-limited
+"""
+ 
+This is an endpoint used for testing
+That is used for when developers want to avoid getting rate-limited
+    
+"""
 
 @app.route("/simple-sum", methods=["POST"])
 def simple_summary_call():
@@ -52,9 +59,6 @@ def agent_call():
 @app.route("/simple-agent-call", methods=["POST"])
 def simple_agent_call():
 
-    #"response":"[\n  {\n    \"agentResponse\": \"Hello! How can I assist you today?\",\n    \"index\": -1\n  }\n]"
-    # Make sure agent_response is a string
-    # This resulted in an error when it wasn't
     agent_response = "[{\"agentResponse\": \"This is the simple agent call. How can I assist you today\", \"index\": -1}]"
 
     response = {"response": agent_response}
@@ -62,7 +66,8 @@ def simple_agent_call():
 
     return jsonify(response)
 
-    
+### ================================ End of End Points ================================ ###
+
     
 
 if __name__ == '__main__':
