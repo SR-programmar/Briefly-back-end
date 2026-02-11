@@ -1,8 +1,8 @@
-from api import requestOpenAI
+from api import requestAI
 
 # Separate chat to an AI agent that acts as a Siri-like Web browser assistant
 # That can answer simple questions but also perform browser operations
-def agent_request(user_prompt):
+def agent_request(user_prompt, ai_model="OpenAI"):
 
     SYSTEM_INSTRUCTION = """
     You are an A.I agent that can answer questions as well as perform browser operations. 
@@ -44,7 +44,7 @@ def agent_request(user_prompt):
     messages = [{ "role":"system", "content": SYSTEM_INSTRUCTION },
             { "role":"user", "content": user_prompt }]
 
-    response = requestOpenAI(messages)
+    response = requestAI(messages, ai_model)
 
     return response
 

@@ -1,6 +1,6 @@
 
 ### AI Summarizer ###
-from api import requestOpenAI
+from api import requestAI
 
 from preprocess import pre_process_webpage
 
@@ -10,37 +10,35 @@ sum_types = {
 
     "research": "You are a helpful assistant that helps assist blind users that are trying to research articles in a webpage. You will be getting a messy input that includes all the text content of the whole website. Your purpose is to return an organized notes that includes everything stated in the webpage. The notes must include everything in the webpage, but it shouldn't be very long. You are not to include texts from the following elements - Navigation, Buttons, Header, Footer Anchor Links. You are only going to include text content from the main element. You should only return the notes and not speak of anything else.",
 
-    "paragraph": "You are a helpful assistant that summarizes the content of an webpage. You will be getting a messy input that includes all the text content of an webpage. You are required to sort out the paragraphs, and summarize it paragraph by paragraph. You must not leave out any paragraph. You may leave out elements that are not significant like Navigation, Footer, Header, Button etc. The summary of each paragraph should be brief. You should only return paragraph by paragraph summary, and not speak of anything else.",
+    "paragraph": "You are a helpful assistant that summarizes the content of an webpage. You will be getting a messy input that includes all the text content of an webpage. You are required to sort out the paragraphs, and give a short easy-to-understand summary of each paragraph. You must not leave out any paragraph. You may leave out elements that are not significant like Navigation, Footer, Header, Button etc. The summary of each paragraph should be brief. You should only return paragraph by paragraph summary, and not speak of anything else.",
 
     "learn": "You are a helpful assistant that is trying to condense information on a webpage to have users learn something. You'll be given messy input, but your job is to figure out what the input is trying to teach and then teach that subject to the user as briefly as possible. You can leave out elements that aren't significant like Navigation, Footer, Header, Button, etc. Don't speak of anything else."
 }
 
 # Summarizes the webpage's content using OpenAI's model
-def AI_summarization(webpage_content, length, sum_type="general"):
-
-    # If mode is long
-    char_amt = "1500 characters"
+def AI_summarization(webpage_content, length="Long", sum_type="general", ai_model="OpenAI"):
 
     ### Different types of summary lengths depending on user preference ###
-    if length == "Two-Sentence":
-        char_amt = "two sentences"
-    elif length == "Medium":
-        char_amt = "750 characters"
-    elif length == "Short":
-        char_amt = "500 characters"
+    char_amts = {
+        "Long": "1500 characters",
+        "Medium": "750 characters",
+        "Short": "500 characters",
+        "Two-Sentence": "two sentences"
+    }
 
+    
     SYSTEM_INSTRUCTION = f"""
       {sum_types[sum_type]}
-      Don’t include asterisks and the summary should be around {char_amt} and below. Do not put “Summary: “ at the beginning.
-
-"""
+      Don’t include asterisks. The summary should no more than {char_amts[length]} which means you may need to truncate parts that are unimportant.
+      Do not put “Summary: “ at the beginning.
+    """
 
     messages = [
             { "role":"system", "content": SYSTEM_INSTRUCTION },
             { "role":"user", "content": pre_process_webpage(webpage_content) }
         ]
 
-    response = requestOpenAI(messages)
+    response = requestAI(messages, ai_model)
 
     return response
 
