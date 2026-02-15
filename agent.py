@@ -39,12 +39,13 @@ def agent_request(user_prompt, ai_model="OpenAI"):
     Most importantly, they should be able to send mail. Their response may include a subject and receiver but it shouldn't include a body
     https://mail.google.com/mail/u/0/?fs=1&to=someone@example.com&su=SUBJECT+additional+info&tf=cm
 
+    When creating the object, just start with the "[" Don't try to wrap it around quotes or anything and don't include the word json
     """
 
     messages = [{ "role":"system", "content": SYSTEM_INSTRUCTION },
             { "role":"user", "content": user_prompt }]
 
-    response = requestAI(messages, ai_model)
+    response = requestAI(messages, ai_type=ai_model, type="agent")
 
     return response
 

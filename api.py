@@ -29,17 +29,17 @@ def requestOpenAI(messages):
 
 # Pass in a dictionary of messages to instruct an AI Model from Google
 def requestGoogle(message, instruction, model):
-
+    
     # Creates chat with a
     response = gemini_client.models.generate_content(
         model=model,
-        contents=f"""{instruction}\n\n\n{message}\n\n\nWhen creating the object, just start with the "[" Don't try to wrap it around quotes or anything and don't include the word json"""
+        contents=f"""Instruction: {instruction}\n Prompt: {message}\n"""
     )
     # Returns AI response
     return response.text
 
 # Makes a request to an NLP from OpenAI or Google
-def requestAI(messages, ai_type="OpenAI", google_model="gemma-3-12b-it"):
+def requestAI(messages, type, ai_type="OpenAI"):
     if ai_type == "OpenAI":
         return requestOpenAI(messages)
     elif ai_type == "Google":
@@ -51,5 +51,6 @@ def requestAI(messages, ai_type="OpenAI", google_model="gemma-3-12b-it"):
                 system_instruction = message["content"]
             elif message["role"] == "user":
                 prompt = message["content"]
-
+        print(system_instruction)
+        google_model = "gemma-3-12b-it" if type == "agent" else "gemini-2.5-flash-lite"
         return requestGoogle(prompt, system_instruction, google_model)

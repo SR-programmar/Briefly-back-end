@@ -38,7 +38,7 @@ def AI_summarization(webpage_content, length="Long", sum_type="general", ai_mode
             { "role":"user", "content": pre_process_webpage(webpage_content) }
         ]
 
-    response = requestAI(messages, ai_model)
+    response = requestAI(messages, ai_type=ai_model, type="summary")
 
     return response
 

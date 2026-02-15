@@ -1,8 +1,10 @@
 ### Modules ###
 from flask import Flask, request, jsonify
+from flask_cors import CORS
+
 from summarizer import AI_summarization
 from agent import agent_request
-from flask_cors import CORS
+
 
 app = Flask(__name__)
 # Allows other origins to make POST requests to this server
@@ -20,8 +22,10 @@ def root_url():
 def AI_summary_call():
     data = request.get_json()
 
-    summary = AI_summarization(data["input"], data["length"], data["sum_type"])
-
+    model = data["ai_model"] if "ai_model" in data else "OpenAI"
+    print(model)
+    summary = AI_summarization(data["input"], data["length"], data["sum_type"], ai_model=model)
+    
     response = {"summary": summary}
 
     return jsonify(response)
@@ -49,7 +53,10 @@ def simple_summary_call():
 def agent_call():
     data = request.get_json()
 
-    agent_response = agent_request(data["input"])
+    model = data["ai_model"] if "ai_model" in data else "OpenAI"
+    print(model)
+    agent_response = agent_request(user_prompt=data["input"], ai_model=model)
+
     response = {"response": agent_response}
 
 
