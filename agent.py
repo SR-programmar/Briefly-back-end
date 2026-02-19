@@ -2,7 +2,7 @@ from api import requestOpenAI
 
 # Separate chat to an AI agent that acts as a Siri-like Web browser assistant
 # That can answer simple questions but also perform browser operations
-def agent_request(user_prompt):
+def agent_request(user_prompt, language="english"):
 
     SYSTEM_INSTRUCTION = """
     You are an A.I agent that can answer questions as well as perform browser operations. 
@@ -39,7 +39,8 @@ def agent_request(user_prompt):
     Most importantly, they should be able to send mail. Their response may include a subject and receiver but it shouldn't include a body
     https://mail.google.com/mail/u/0/?fs=1&to=someone@example.com&su=SUBJECT+additional+info&tf=cm
 
-    """
+    
+    """ + f"The agentResponse should be in {language}"
 
     messages = [{ "role":"system", "content": SYSTEM_INSTRUCTION },
             { "role":"user", "content": user_prompt }]

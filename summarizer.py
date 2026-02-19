@@ -16,7 +16,7 @@ sum_types = {
 }
 
 # Summarizes the webpage's content using OpenAI's model
-def AI_summarization(webpage_content, length, sum_type="general"):
+def AI_summarization(webpage_content, length, sum_type="general", language="english"):
 
     # If mode is long
     char_amt = "1500 characters"
@@ -32,6 +32,7 @@ def AI_summarization(webpage_content, length, sum_type="general"):
     SYSTEM_INSTRUCTION = f"""
       {sum_types[sum_type]}
       Don’t include asterisks and the summary should be around {char_amt} and below. Do not put “Summary: “ at the beginning.
+      The summary should be in {language}
 
 """
 
