@@ -27,7 +27,7 @@ def root_url():
 def AI_summary_call():
     data = request.get_json()
 
-    selected_language = "spanish" if data["language"] == "spanish" else "english"
+    selected_language = data["language"] if "language" in data else "english"
     summary = AI_summarization(data["input"], data["length"], data["sum_type"],
                                language=selected_language)
 
@@ -52,7 +52,7 @@ def simple_summary_call():
 @app.route("/agent-call", methods=["POST"])
 def agent_call():
     data = request.get_json()
-    selected_language = "spanish" if data["language"] == "spanish" else "english"
+    selected_language = data["language"] if "language" in data else "english"
     agent_response = agent_request(data["input"], language=selected_language)
     response = {"response": agent_response}
 
