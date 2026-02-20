@@ -1,8 +1,15 @@
 ### Modules ###
+
+# Third-party packages
 from flask import Flask, request, jsonify
+from flask_cors import CORS
+from deep_translator import GoogleTranslator
+
+# Local Modules
 from summarizer import AI_summarization
 from agent import agent_request
-from flask_cors import CORS
+
+
 
 app = Flask(__name__)
 # Allows other origins to make POST requests to this server
@@ -67,6 +74,15 @@ def simple_agent_call():
 
 
     return jsonify(response)
+
+@app.route("/english-to-spanish", methods=["POST"])
+def english_to_spanish():
+    data = request.get_json()
+    translated = GoogleTranslator(source="auto", target="es").translate(data["text"])
+    print(translated)
+    return jsonify({"translatedText": translated})
+
+
 
 ### ================================ End of End Points ================================ ###
 
