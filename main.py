@@ -1,10 +1,17 @@
 ### Modules ###
+
+# Third-party packages
 from flask import Flask, request, jsonify
+from flask_cors import CORS
+from deep_translator import GoogleTranslator
+
+# Local Modules
 from summarizer import AI_summarization
 from agent import agent_request
-from flask_cors import CORS
 
+# Flask object
 app = Flask(__name__)
+
 # Allows other origins to make POST requests to this server
 CORS(app, methods=["POST"])
 
@@ -15,7 +22,7 @@ def root_url():
 
 ### ================================ End Points ================================ ###
 
-# Endpoint takes in webpage content and summarizes it with specified parameters
+# Endpoint takes in webpage content and summarizes it with specified parameters and Artificial Intelligence
 @app.route("/ai-sum", methods=["POST"])
 def AI_summary_call():
     data = request.get_json()
@@ -28,13 +35,7 @@ def AI_summary_call():
 
     return jsonify(response)
 
-"""
- 
-This is an endpoint used for testing
-That is used for when developers want to avoid getting rate-limited
-    
-"""
-
+# This is to test the summary feature without using API calls
 @app.route("/simple-sum", methods=["POST"])
 def simple_summary_call():
 
@@ -46,7 +47,8 @@ def simple_summary_call():
 
     return jsonify(response)
     
-# When user prompts the agent
+# Sends a prompt to Artificial intelligence to create
+# a JSON object to be analyzed on the front-end
 @app.route("/agent-call", methods=["POST"])
 def agent_call():
     data = request.get_json()
@@ -57,7 +59,7 @@ def agent_call():
 
     return jsonify(response)
 
-# Used for developers to make calls without utilizing OpenAI API
+# Used for developers to test the AI Agent without using API calls
 @app.route("/simple-agent-call", methods=["POST"])
 def simple_agent_call():
 
@@ -65,8 +67,16 @@ def simple_agent_call():
 
     response = {"response": agent_response}
 
-
     return jsonify(response)
+
+# This endpoint translates given text into Spanish
+@app.route("/english-to-spanish", methods=["POST"])
+def english_to_spanish():
+    data = request.get_json()
+    translated = GoogleTranslator(source="auto", target="es").translate(data["text"])
+    return jsonify({"translatedText": translated})
+
+
 
 ### ================================ End of End Points ================================ ###
 

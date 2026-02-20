@@ -1,12 +1,20 @@
+### Modules ###
 from dotenv import load_dotenv
 from os import getenv
 from openai import OpenAI
+
+"""
+
+This file is used to make API calls to Artificial Intelligence.
+It sends the AI instructions on its behavior and then
+a prompt or content for it to analyze.
+
+"""
 
 load_dotenv() # Load environment variables
 
 ENDPOINT = "https://models.github.ai/inference"
 TOKEN = getenv("GITHUB_TOKEN")
-
 
 client = OpenAI(api_key=TOKEN, base_url=ENDPOINT)
 
