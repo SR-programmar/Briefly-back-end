@@ -1,7 +1,12 @@
 from api import requestOpenAI
 
-# Separate chat to an AI agent that acts as a Siri-like Web browser assistant
-# That can answer simple questions but also perform browser operations
+"""
+This file is used to instruct Artificial Intelligence to return
+a JSON object. It determines an 'agentResponse', function, and arguments
+for those functions. This object is analyzed at the front-end to make
+execute code.
+"""
+
 def agent_request(user_prompt, language="english"):
 
     SYSTEM_INSTRUCTION = """
