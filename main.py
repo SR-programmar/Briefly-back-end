@@ -79,6 +79,6 @@ def simple_agent_call():
 
 if __name__ == '__main__':
     # Don't use debug=True in production!!!
-    app.run(debug=False)
+    app.run(debug=True)
 
 

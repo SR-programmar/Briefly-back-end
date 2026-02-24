@@ -1,5 +1,3 @@
-
-### AI Summarizer ###
 from api import requestAI
 
 from preprocess import pre_process_webpage
@@ -29,7 +27,9 @@ def AI_summarization(webpage_content, length="Long", sum_type="general", ai_mode
     
     SYSTEM_INSTRUCTION = f"""
       {sum_types[sum_type]}
-      Don’t include asterisks. The summary should no more than {char_amts[length]} which means you may need to truncate parts that are unimportant.
+      Don’t include asterisks. 
+      The summary should no more than {char_amts[length]} 
+      which means you may need to truncate parts that are unimportant.
       Do not put “Summary: “ at the beginning.
     """
 
