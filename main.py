@@ -28,12 +28,10 @@ def AI_summary_call():
     data = request.get_json()
 
     model = data["ai_model"] if "ai_model" in data else "OpenAI"
-    selected_language = data["language"] if "language" in data else "english"
     summary = AI_summarization(data["input"], 
                                data["length"], 
                                data["sum_type"], 
-                               ai_model=model,
-                               language=selected_language)
+                               ai_model=model)
     
 
     response = {"summary": summary}
@@ -59,12 +57,10 @@ def agent_call():
     data = request.get_json()
 
     model = data["ai_model"] if "ai_model" in data else "OpenAI"
-    selected_language = data["language"] if "language" in data else "english"
 
 
     agent_response = agent_request(user_prompt=data["input"],  
-                                   ai_model=model, 
-                                   language=selected_language)
+                                   ai_model=model)
     
     response = {"response": agent_response}
 

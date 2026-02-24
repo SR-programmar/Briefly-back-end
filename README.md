@@ -2,6 +2,8 @@
 
 ![Briefly Logo](resources/Briefly%20Logo.png)
 
+Logo created in [Canva]("https://www.canva.com/")
+
 - This contains the back-end processes for the Briefly Chrome Extension.
 - The job of this server is to make API calls to a LLM from OpenAI
 - This server was made using the Flask Python Framework.

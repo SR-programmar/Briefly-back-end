@@ -22,7 +22,7 @@ sum_types = {
 }
 
 # Summarizes the webpage's content using OpenAI's model
-def AI_summarization(webpage_content, length="Long", sum_type="general", language="english", ai_model="OpenAI"):
+def AI_summarization(webpage_content, length="Long", sum_type="general", ai_model="OpenAI"):
 
     ### Different types of summary lengths depending on user preference ###
     char_amts = {
@@ -39,7 +39,6 @@ def AI_summarization(webpage_content, length="Long", sum_type="general", languag
       The summary should no more than {char_amts[length]} 
       which means you may need to truncate parts that are unimportant.
       Do not put “Summary: “ at the beginning.
-      The summary should be in {language}
     """
 
     messages = [
