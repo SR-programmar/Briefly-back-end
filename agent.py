@@ -8,8 +8,9 @@ execute code.
 """
 
 def agent_request(user_prompt, language="english", ai_model="OpenAI"):
-     # Retrieves instructions for prompting the Artificial Intelligence
-    with open("instructions/openai_agent.txt") as f:
+    # Retrieves instructions for prompting the Artificial Intelligence
+    file_path = "gemini_agent" if ai_model == "Google" else "openai_agent"
+    with open(f"instructions/{file_path}.txt") as f:
         SYSTEM_INSTRUCTION = f.read()+ f"The agentResponse should be in {language}"
     
 

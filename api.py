@@ -67,10 +67,7 @@ def requestAI(messages, type, ai_type="OpenAI"):
         
         google_model = "gemini-2.5-flash-lite" if type == "agent" else "gemini-2.5-flash-lite"
         
-        if type == "agent":
-            # Retrieves instructions for how Agent should behave
-            with open("instructions/gemini_agent.txt", "r") as f:
-                system_instruction = f.read()
+        
         if type == "summary":
             system_instruction += "If you received small inputs like 'hello there' or 'give me food' then ask for a webpage's content!"
 
