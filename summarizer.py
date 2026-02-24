@@ -2,6 +2,14 @@ from api import requestAI
 
 from preprocess import pre_process_webpage
 
+"""
+
+This file includes instructions for Artificial intelligence to summarize
+the content of a webpage for a visually impaired user to provide
+relevant, useful, and desired information
+
+"""
+
 # System Prompts
 sum_types = {
     "general": "You are a helpful assistant that summarizes the content of an webpage. The summary is intended to help blind users read the content of a webpage faster than a screenreader. You will be getting a messy input that includes all the text content of the whole website. You are required to organize it, and find the most important things to include (E.g. Navigation, Footer, Header, Important Articles etc.). You are not to include anything that unimportant in the summary. The summary of the webpage should be very descriptive, but brief so the user doesn't have to listen for long. You should only return the summary and not speak of anything else.",
@@ -14,7 +22,7 @@ sum_types = {
 }
 
 # Summarizes the webpage's content using OpenAI's model
-def AI_summarization(webpage_content, length="Long", sum_type="general", ai_model="OpenAI"):
+def AI_summarization(webpage_content, length="Long", sum_type="general", language="english", ai_model="OpenAI"):
 
     ### Different types of summary lengths depending on user preference ###
     char_amts = {
@@ -31,6 +39,7 @@ def AI_summarization(webpage_content, length="Long", sum_type="general", ai_mode
       The summary should no more than {char_amts[length]} 
       which means you may need to truncate parts that are unimportant.
       Do not put “Summary: “ at the beginning.
+      The summary should be in {language}
     """
 
     messages = [
