@@ -27,9 +27,14 @@ def root_url():
 def AI_summary_call():
     data = request.get_json()
 
+    model = data["ai_model"] if "ai_model" in data else "OpenAI"
     selected_language = data["language"] if "language" in data else "english"
-    summary = AI_summarization(data["input"], data["length"], data["sum_type"],
+    summary = AI_summarization(data["input"], 
+                               data["length"], 
+                               data["sum_type"], 
+                               ai_model=model,
                                language=selected_language)
+    
 
     response = {"summary": summary}
 
@@ -52,8 +57,15 @@ def simple_summary_call():
 @app.route("/agent-call", methods=["POST"])
 def agent_call():
     data = request.get_json()
+
+    model = data["ai_model"] if "ai_model" in data else "OpenAI"
     selected_language = data["language"] if "language" in data else "english"
-    agent_response = agent_request(data["input"], language=selected_language)
+
+
+    agent_response = agent_request(user_prompt=data["input"],  
+                                   ai_model=model, 
+                                   language=selected_language)
+    
     response = {"response": agent_response}
 
 
@@ -84,6 +96,6 @@ def english_to_spanish():
 
 if __name__ == '__main__':
     # Don't use debug=True in production!!!
-    app.run(debug=False)
+    app.run(debug=True)
 
 

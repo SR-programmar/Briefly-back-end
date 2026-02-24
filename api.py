@@ -1,4 +1,5 @@
-### Modules ###
+from google import genai
+from google.genai import types
 from dotenv import load_dotenv
 from os import getenv
 from openai import OpenAI
@@ -16,13 +17,14 @@ load_dotenv() # Load environment variables
 ENDPOINT = "https://models.github.ai/inference"
 TOKEN = getenv("GITHUB_TOKEN")
 
-client = OpenAI(api_key=TOKEN, base_url=ENDPOINT)
+# Clients
+openai_client = OpenAI(api_key=TOKEN, base_url=ENDPOINT)
+gemini_client = genai.Client(api_key=getenv("GEMINI_KEY"))
 
-# Pass in a dictionary of messages to instruct an OpenAI Model on what to do
-
+# Pass in a dictionary of messages to instruct an AI Model from OpenAI
 def requestOpenAI(messages):
     # Creates a chat with an OpenAI Natural Language Processor
-    response = client.chat.completions.create(
+    response = openai_client.chat.completions.create(
         messages=messages,
         temperature=1.0,
         top_p=1.0,
@@ -32,3 +34,41 @@ def requestOpenAI(messages):
 
     # Returns AI response
     return response.choices[0].message.content
+
+# Pass in a dictionary of messages to instruct an AI Model from Google
+def requestGoogle(message, instruction, model):
+    # Creates chat with a version of Gemini from Google
+    response = gemini_client.models.generate_content(
+    model=model,
+    contents=message,
+    config=types.GenerateContentConfig(
+        system_instruction=instruction, 
+        temperature=0,
+        top_p=1.0, 
+        max_output_tokens=1950
+        )
+    )
+    # Returns AI response
+    return response.text
+
+# Makes a request to an NLP from OpenAI or Google
+def requestAI(messages, type, ai_type="OpenAI"):
+    if ai_type == "OpenAI":
+        return requestOpenAI(messages)
+    elif ai_type == "Google":
+        system_instruction = ""
+        prompt = ""
+    
+        for message in messages:
+            if message["role"] == "system":
+                system_instruction = message["content"]
+            elif message["role"] == "user":
+                prompt = message["content"]
+        
+        google_model = "gemini-2.5-flash-lite" if type == "agent" else "gemini-2.5-flash-lite"
+        
+        
+        if type == "summary":
+            system_instruction += "If you received small inputs like 'hello there' or 'give me food' then ask for a webpage's content!"
+
+        return requestGoogle(prompt, system_instruction, google_model)
