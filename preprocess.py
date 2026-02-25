@@ -36,6 +36,12 @@ def pre_process_webpage(webpage_content):
          processed_page = processed_page[:19900] + "..."
 
     return processed_page
+
+# Remove unwanted strings from Gemini output to avoid errors
+def pre_process_gemini_agent(output):
+    output = output.replace("```", "")
+    output = output.replace("json", "")
+    return output
     
 ### Testing ###
 if __name__ == "__main__":
@@ -45,9 +51,5 @@ if __name__ == "__main__":
             for line in f:
                 lines += line
 
-# Remove unwanted strings from Gemini output to avoid errors
-def pre_process_gemini_agent(output):
-    output = output.replace("```", "")
-    output = output.replace("json", "")
-    return output
+
 
