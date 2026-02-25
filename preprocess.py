@@ -45,3 +45,9 @@ if __name__ == "__main__":
             for line in f:
                 lines += line
 
+# Remove unwanted strings from Gemini output to avoid errors
+def pre_process_gemini_agent(output):
+    output = output.replace("```", "")
+    output = output.replace("json", "")
+    return output
+

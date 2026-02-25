@@ -71,7 +71,7 @@ def agent_call():
 @app.route("/simple-agent-call", methods=["POST"])
 def simple_agent_call():
 
-    agent_response = "[{\"agentResponse\": \"This is the simple agent call. How can I assist you today\", \"index\": -1}]"
+    agent_response = "{\"agentResponse\": \"This is the simple agent call. How can I assist you today\", \"index\": -1}"
 
     response = {"response": agent_response}
 
