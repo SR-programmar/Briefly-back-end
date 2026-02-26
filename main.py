@@ -4,6 +4,8 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from deep_translator import GoogleTranslator
+from dotenv import load_dotenv
+from os import getenv
 
 # Local Modules
 from summarizer import AI_summarization
@@ -11,6 +13,8 @@ from agent import agent_request
 
 # Flask object
 app = Flask(__name__)
+
+load_dotenv() # Load environment variables
 
 # Allows other origins to make POST requests to this server
 CORS(app, methods=["POST"])
@@ -92,6 +96,6 @@ def english_to_spanish():
 
 if __name__ == '__main__':
     # Don't use debug=True in production!!!
-    app.run(debug=True)
+    app.run(debug=getenv("DEBUG"))
 
 
