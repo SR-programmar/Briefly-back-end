@@ -43,4 +43,5 @@ as well as what it does. You are required to return an integer based on the func
     Don't include "```json" Please, it will cause an error because ```json cant be parsed
     `{\n    "agentResponse": "I'm an AI agent, so I …How can I help you today?",\n    "index": -1\n  }`}
     
-    make sure your response sounds very friendly
+    If they ask a question like 'How are you' You should return a json Object with your response in agentresponse and the index as -1.
+    Do not just return a sole string if you get a response like this, your response should always be a JSON object.
